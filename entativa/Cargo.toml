@@ -1,0 +1,40 @@
+[package]
+name        = "entativa"
+version     = "0.1.0"
+edition     = "2021"
+description = "Entativa — video-only client. Rust/Blinc."
+
+[[bin]]
+name = "entativa"
+path = "src/main.rs"
+
+[dependencies]
+# Async runtime
+tokio          = { version = "1",    features = ["full"] }
+
+# Raw gRPC — native client, full HTTP/2, bidirectional streaming available
+tonic          = { version = "0.11", features = ["tls", "tls-roots"] }
+prost          = { version = "0.12" }
+
+# Shared auth UI (login, register, logout sheet, accounts center)
+piercer-auth-ui = { path = "../piercer-auth-ui" }
+
+# Serialisation
+serde          = { version = "1",    features = ["derive"] }
+serde_json     = { version = "1" }
+
+# Errors / logging
+anyhow         = { version = "1" }
+thiserror      = { version = "1" }
+tracing        = { version = "0.1" }
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# IDs / time
+uuid           = { version = "1",    features = ["v4", "serde"] }
+chrono         = { version = "0.4",  features = ["serde"] }
+
+# Config
+config         = { version = "0.14" }
+
+[build-dependencies]
+tonic-build = "0.11"
